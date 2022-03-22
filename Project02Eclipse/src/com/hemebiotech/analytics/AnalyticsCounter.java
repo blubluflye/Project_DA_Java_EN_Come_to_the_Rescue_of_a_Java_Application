@@ -1,23 +1,44 @@
 package com.hemebiotech.analytics;
 
 import java.io.BufferedReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.List;
 
+
+public class OC{
+	public static void main(String args[]) {
+		if (args.length > 0)
+		{
+			System.out.println("test d'argument succes" + args[0]);
+			ReadSymptomDataFromFile symptomList = new ReadSymptomDataFromFile(args[0]);
+			AnalyticsCounter analytics = new AnalyticsCounter(symptomList.GetSymptoms());
+			Map<String, Integer> result = analytics.getAnalytics();
+		}
+		else {
+			System.out.println("test pas d'argument succes");
+		}
+	}
+}
+	
 public class AnalyticsCounter {
 	
-	private static int headacheCount = 0;	// initialize to 0
-	private static int rashCount = 0;		// initialize to 0
-	private static int pupilCount = 0;		// initialize to 0
+	List<String> symptomList;
+	//private static int headacheCount = 0;	// initialize to 0
+	//private static int rashCount = 0;		// initialize to 0
+	//private static int pupilCount = 0;		// initialize to 0
 	
-	public static void main(String args[]) throws Exception {
-		// first get input
+	
+	
+		/* first get input
 		BufferedReader reader = new BufferedReader (new FileReader("symptoms.txt"));
 		String line = reader.readLine();
 
-		/**these 2 variables are useless
-		int i = 0;	// set i to 0 we never use i
-		int headCount = 0;	// counts headaches we already have headacheCount*/
+		//these 2 variables are useless
+		//int i = 0;	// set i to 0 we never use i
+		//int headCount = 0;	// counts headaches we already have headacheCount
 		while (line != null) {
 			//i++;	// increment i
 			//System.out.println("symptom from file: " + line);
@@ -43,6 +64,28 @@ public class AnalyticsCounter {
 		writer.write("headache: " + headacheCount + "\n");
 		writer.write("rash: " + rashCount + "\n");
 		writer.write("dialated pupils: " + pupilCount + "\n");
-		writer.close();
-	}
+		writer.close();*/
+	
+		
+		AnalyticsCounter(List<String> symptomList)
+		{
+			this.symptomList = symptomList;
+		}
+		public Map<String, Integer> getAnalytics()
+		{
+			Map<String, Integer> result = new HashMap<String, Integer>();
+			for (int i = 0; i < symptomList.size(); i++)
+			{
+				//String symtpom = symptomList.get(i);
+				if ( result.get(symptomList.get(i)) == null)
+				{
+					result.put(symptomList.get(i), 1);
+				}
+				else
+				{
+					result.put(symptomList.get(i), result.get(symptomList.get(i)));
+				}
+			}
+			return result;
+		}
 }
