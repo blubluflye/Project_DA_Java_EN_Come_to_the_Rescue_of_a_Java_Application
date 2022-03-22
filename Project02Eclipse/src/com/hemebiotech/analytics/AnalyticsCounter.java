@@ -58,7 +58,6 @@ public class AnalyticsCounter {
 			Map<String, Integer> result = new HashMap<String, Integer>();
 			for (int i = 0; i < symptomList.size(); i++)
 			{
-				//String symtpom = symptomList.get(i);
 				if ( result.get(symptomList.get(i)) == null)
 				{
 					result.put(symptomList.get(i), 1);
