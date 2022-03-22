@@ -1,27 +1,9 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
 import java.util.HashMap;
-import java.util.Map;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.List;
+import java.util.Map;
 
-
-public class OC{
-	public static void main(String args[]) {
-		if (args.length > 0)
-		{
-			System.out.println("test d'argument succes" + args[0]);
-			ReadSymptomDataFromFile symptomList = new ReadSymptomDataFromFile(args[0]);
-			AnalyticsCounter analytics = new AnalyticsCounter(symptomList.GetSymptoms());
-			Map<String, Integer> result = analytics.getAnalytics();
-		}
-		else {
-			System.out.println("test pas d'argument succes");
-		}
-	}
-}
 	
 public class AnalyticsCounter {
 	
@@ -83,7 +65,7 @@ public class AnalyticsCounter {
 				}
 				else
 				{
-					result.put(symptomList.get(i), result.get(symptomList.get(i)));
+					result.put(symptomList.get(i), result.get(symptomList.get(i)) + 1);
 				}
 			}
 			return result;
