@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class AnalyticsCounter {
 	List<String> symptomList;
@@ -30,11 +31,17 @@ public class AnalyticsCounter {
 		}
 		return result;
 	}
+	
+	public Map<String, Integer> sort_map(Map<String, Integer> unsorted_map)
+	{
+		Map<String, Integer> sorted_map = new TreeMap<String, Integer>(unsorted_map);
+		return sorted_map;
+	}
 
 	public static void main(String args[]) throws Exception {
 		ReadSymptomDataFromFile symptomList = new ReadSymptomDataFromFile("./Project02Eclipse/symptoms.txt");
 		AnalyticsCounter analytics = new AnalyticsCounter(symptomList.GetSymptoms());
-		Map<String, Integer> result = analytics.getAnalytics();
+		Map<String, Integer> result = analytics.sort_map(analytics.getAnalytics());
 		try
 		{
 			FileWriter writer = new FileWriter("result.out");
