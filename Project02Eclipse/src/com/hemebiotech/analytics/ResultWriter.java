@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.hemebiotech.analytics;
 
 import java.io.FileNotFoundException;
@@ -9,7 +6,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * @author Home
+ * Simple brute force implementation
  *
  */
 public class ResultWriter implements SymptomWriter {
@@ -17,6 +14,10 @@ public class ResultWriter implements SymptomWriter {
 	public String filepath;
 	public Map<String, Integer> symptomsMap;
 	
+	/**
+	 * 
+	 * @param filepath a full or partial path to file where write result, symptomsMap a ordored map of counted symptoms
+	 */
 	public ResultWriter(String filepath, Map<String, Integer> symptomsMap) {
 		this.filepath = filepath;
 		this.symptomsMap = symptomsMap;
