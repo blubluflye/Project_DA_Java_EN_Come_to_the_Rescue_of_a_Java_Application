@@ -1,43 +1,59 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
+/**
+ * From a list of symptoms give u an ordered Map of the counted symptoms
+ * Write this Map in a file result.out
+ * 
+ */
 public class AnalyticsCounter {
-	private static int headacheCount = 0;	// initialize to 0
-	private static int rashCount = 0;		// initialize to 0
-	private static int pupilCount = 0;		// initialize to 0
+	List<String> symptomList;
 	
-	public static void main(String args[]) throws Exception {
-		// first get input
-		BufferedReader reader = new BufferedReader (new FileReader("symptoms.txt"));
-		String line = reader.readLine();
-
-		int i = 0;	// set i to 0
-		int headCount = 0;	// counts headaches
-		while (line != null) {
-			i++;	// increment i
-			System.out.println("symptom from file: " + line);
-			if (line.equals("headache")) {
-				headCount++;
-				System.out.println("number of headaches: " + headCount);
+	/**
+	 * 
+	 * @param a list of String which is the symptom's list
+	 */
+	AnalyticsCounter(List<String> symptomList)
+	{
+		this.symptomList = symptomList;
+	}
+	public Map<String, Integer> getAnalytics()
+	{
+		Map<String, Integer> result = new HashMap<String, Integer>();
+		for (int i = 0; i < symptomList.size(); i++)
+		{
+			if ( result.get(symptomList.get(i)) == null)
+			{
+				result.put(symptomList.get(i), 1);
 			}
-			else if (line.equals("rush")) {
-				rashCount++;
+			else
+			{
+				result.put(symptomList.get(i), result.get(symptomList.get(i)) + 1);
 			}
-			else if (line.contains("pupils")) {
-				pupilCount++;
-			}
-
-			line = reader.readLine();	// get another symptom
 		}
-		
-		// next generate output
-		FileWriter writer = new FileWriter ("result.out");
-		writer.write("headache: " + headacheCount + "\n");
-		writer.write("rash: " + rashCount + "\n");
-		writer.write("dialated pupils: " + pupilCount + "\n");
-		writer.close();
+		return result;
+	}
+	
+	/**
+	 * Sort a Map
+	 * @param a Map
+	 * @return a Map
+	 */
+	public Map<String, Integer> sort_map(Map<String, Integer> unsorted_map)
+	{
+		Map<String, Integer> sorted_map = new TreeMap<String, Integer>(unsorted_map);
+		return sorted_map;
+	}
+
+	public static void main(String args[]) throws Exception {
+		ReadSymptomDataFromFile symptomList = new ReadSymptomDataFromFile("./Project02Eclipse/symptoms.txt");
+		AnalyticsCounter analytics = new AnalyticsCounter(symptomList.getSymptoms());
+		Map<String, Integer> result = analytics.sort_map(analytics.getAnalytics());
+		ResultWriter writer = new ResultWriter("result.out", result);
+		writer.writeSymptoms();
 	}
 }
