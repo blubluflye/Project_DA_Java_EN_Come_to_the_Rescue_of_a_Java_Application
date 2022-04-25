@@ -17,22 +17,17 @@ public class AnalyticsCounter {
 	 * 
 	 * @param a list of String which is the symptom's list
 	 */
-	AnalyticsCounter(List<String> symptomList)
-	{
+	AnalyticsCounter(List<String> symptomList) {
 		this.symptomList = symptomList;
 	}
-	public Map<String, Integer> getAnalytics()
-	{
+	public Map<String, Integer> getAnalytics() {
 		Map<String, Integer> result = new HashMap<String, Integer>();
-		for (int i = 0; i < symptomList.size(); i++)
-		{
-			if ( result.get(symptomList.get(i)) == null)
-			{
-				result.put(symptomList.get(i), 1);
+		for (String temp : symptomList){
+			if ( result.get(temp) == null){
+				result.put(temp, 1);
 			}
-			else
-			{
-				result.put(symptomList.get(i), result.get(symptomList.get(i)) + 1);
+			else{
+				result.put(temp, result.get(temp) + 1);
 			}
 		}
 		return result;
@@ -43,8 +38,7 @@ public class AnalyticsCounter {
 	 * @param a Map
 	 * @return a Map
 	 */
-	public Map<String, Integer> sort_map(Map<String, Integer> unsorted_map)
-	{
+	public Map<String, Integer> sort_map(Map<String, Integer> unsorted_map) {
 		Map<String, Integer> sorted_map = new TreeMap<String, Integer>(unsorted_map);
 		return sorted_map;
 	}

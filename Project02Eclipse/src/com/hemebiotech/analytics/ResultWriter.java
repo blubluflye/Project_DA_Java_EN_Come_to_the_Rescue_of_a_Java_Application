@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class ResultWriter implements SymptomWriter {
 
-	public String filepath;
+	public String filePath;
 	public Map<String, Integer> symptomsMap;
 	
 	/**
@@ -19,15 +19,14 @@ public class ResultWriter implements SymptomWriter {
 	 * @param filepath a full or partial path to file where write result, symptomsMap a ordored map of counted symptoms
 	 */
 	public ResultWriter(String filepath, Map<String, Integer> symptomsMap) {
-		this.filepath = filepath;
+		this.filePath = filepath;
 		this.symptomsMap = symptomsMap;
 	}
 	
 	@Override
 	public void writeSymptoms() throws FileNotFoundException {
-		try
-		{
-			FileWriter writer = new FileWriter(filepath);
+		try {
+			FileWriter writer = new FileWriter(filePath);
 			symptomsMap.forEach((key, value) -> {
 				try {
 					writer.write(key + " " + value + "\n");
