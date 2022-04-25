@@ -18,8 +18,8 @@ public class ResultWriter implements SymptomWriter {
 	 * 
 	 * @param filepath a full or partial path to file where write result, symptomsMap a ordored map of counted symptoms
 	 */
-	public ResultWriter(String filepath, Map<String, Integer> symptomsMap) {
-		this.filePath = filepath;
+	public ResultWriter(String filePath, Map<String, Integer> symptomsMap) {
+		this.filePath = filePath;
 		this.symptomsMap = symptomsMap;
 	}
 	
